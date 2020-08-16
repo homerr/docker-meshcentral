@@ -10,27 +10,24 @@ LABEL maintainer="homerr"
 RUN \
  echo "**** install build packages ****" && \
  apk add --no-cache --virtual=build-dependencies \
+	git \
 	nodejs-npm && \
  echo "**** install runtime packages ****" && \
  apk add --no-cache \
 	curl \
 	jq \
-	nodejs \
+	nodejs && \
  echo "**** grab MeshCentral ****" && \
  if [ -z ${MESHCEN_COMMIT}+x} ]; then \
 	MESHCEN_COMMIT=$(curl -sX GET "https://api.github.com/repos/Ylianst/MeshCentral/commits/master" \
 	| jq -r '. | .sha'); \
  fi && \
- curl -o \
- /tmp/meshcentral.tar.gz -L \
-	"https://github.com/Ylianst/MeshCentral/archives/${MESHCEN_COMMIT}}.tar.gz" && \
+ git clone https://github.com/Ylianst/MeshCentral.git /app/meshcentral && \
  echo "**** install MeshCentral ****" && \
- tar xf \
- /tmp/meshcentral.tar.gz -C \
-	/app/ --strip-components=1 && \
  npm config set unsafe-perm true && \
  npm i npm@latest -g && \
- npm install --prefix /app && \
+ npm install --prefix /app/meshcentral && \
+ chown -R abc:abc /app \
  echo "**** cleanup ****" && \
  apk del --purge \
 	build-dependencies && \
