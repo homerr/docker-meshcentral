@@ -27,7 +27,7 @@ RUN \
  npm config set unsafe-perm true && \
  npm i npm@latest -g && \
  npm install --prefix /app/meshcentral && \
- chown -R abc:abc /app \
+ chown -R abc:abc /app  && \
  echo "**** cleanup ****" && \
  apk del --purge \
 	build-dependencies && \
