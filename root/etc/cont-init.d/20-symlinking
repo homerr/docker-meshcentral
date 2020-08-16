@@ -1,0 +1,10 @@
+#!/usr/bin/with-contenv bash
+
+# create local logs dir
+#mkdir -p \
+#  /config/menus/remote \
+#  /config/menus/local
+
+
+# Ownership
+#chown -R abc:abc /config

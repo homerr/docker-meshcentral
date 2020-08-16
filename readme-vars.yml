@@ -1,0 +1,51 @@
+---
+
+# project information
+project_name: meshcentral
+project_url: "https://www.meshcommander.com/meshcentral2"
+project_logo: "https://lh5.googleusercontent.com/kBHT6SOut0ODcpIFlc7Fxiv0f4ECOk6D45JJUdHpURFHl-zk5XN41gmL2JykQ7ptBZdpaiJU4f8s5RQ9OCtRknFoOaV4EJXhxVGR8SSYB07QOmferAE=w1280"
+project_blurb: "[{{ project_name|capitalize }}]({{ project_url }}) is a simple way to manage multiple Windows PC's from a central location"
+project_lsio_github_repo_url: "https://github.com/linuxserver/docker-{{ project_name }}"
+
+# supported architectures
+available_architectures:
+  - { arch: "{{ arch_x86_64 }}", tag: "amd64-latest"}
+  - { arch: "{{ arch_arm64 }}", tag: "arm64v8-latest"}
+  - { arch: "{{ arch_armhf }}", tag: "arm32v7-latest"}
+
+# development version
+development_versions: false
+development_versions_items:
+
+
+# container parameters
+common_param_env_vars_enabled: true
+param_container_name: "{{ project_name }}"
+param_usage_include_vols: true
+param_volumes:
+  - { vol_path: "/config", vol_host_path: "/path/to/config", desc: "Storage for databases?" }
+param_usage_include_ports: true
+param_ports:
+  - { external_port: "80", internal_port: "80", port_desc: "Web configuration interface." }
+param_usage_include_env: false
+
+# optional env variables
+opt_param_usage_include_env: true
+opt_param_env_vars:
+  - { env_var: "something", env_value: "1.9.9", desc: "something here"}
+opt_param_usage_include_ports: true
+opt_param_ports:
+  - { external_port: "8080", internal_port: "80", port_desc: "webserver" }
+opt_param_usage_include_vols: true
+opt_param_volumes:
+  - { vol_path: "/something", vol_host_path: "/path/to/something", desc: "something" }
+
+# application setup block
+app_setup_block_enabled: true
+app_setup_block: |
+  Information to go here
+
+# changelog
+changelogs:
+  - { date: "16.08.20:", desc: "Development begins" }
+
