@@ -19,11 +19,11 @@ RUN \
  echo "**** grab MeshCentral ****" && \
  if [ -z ${MESHCEN_COMMIT}+x} ]; then \
 	MESHCEN_COMMIT=$(curl -sX GET "https://api.github.com/repos/Ylianst/MeshCentral/commits/master" \
-	| awk '/tag_name/{print $4;exit}' FS='[""]'); \
+	| jq -r '. | .sha'); \
  fi && \
  curl -o \
  /tmp/meshcentral.tar.gz -L \
-	"https://github.com/Ylianst/MeshCentral/${MESHCEN_COMMIT}}.tar.gz" && \
+	"https://github.com/Ylianst/MeshCentral/archives/${MESHCEN_COMMIT}}.tar.gz" && \
  echo "**** install MeshCentral ****" && \
  tar xf \
  /tmp/meshcentral.tar.gz -C \
