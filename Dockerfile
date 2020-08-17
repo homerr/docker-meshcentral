@@ -16,7 +16,8 @@ RUN \
  apk add --no-cache \
 	curl \
 	jq \
-	nodejs && \
+	nodejs \
+	nodejs-npm && \
  echo "**** grab MeshCentral ****" && \
  if [ -z ${MESHCEN_COMMIT}+x} ]; then \
 	MESHCEN_COMMIT=$(curl -sX GET "https://api.github.com/repos/Ylianst/MeshCentral/commits/master" \
@@ -26,6 +27,7 @@ RUN \
  echo "**** install MeshCentral ****" && \
  npm config set unsafe-perm true && \
  npm i npm@latest -g && \
+ npm i archiver@4.0.2 -g && \
  npm install --prefix /app/meshcentral && \
  chown -R abc:abc /app  && \
  echo "**** cleanup ****" && \
